@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment4.Tests", "Assign
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{A2C5D0BD-5EAE-41B1-ADFA-B960E5E63364}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbApp", "DbApp\DbApp.csproj", "{0ABB7EA3-D4AD-414A-8471-6C29DAE4D2EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A2C5D0BD-5EAE-41B1-ADFA-B960E5E63364}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2C5D0BD-5EAE-41B1-ADFA-B960E5E63364}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2C5D0BD-5EAE-41B1-ADFA-B960E5E63364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ABB7EA3-D4AD-414A-8471-6C29DAE4D2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ABB7EA3-D4AD-414A-8471-6C29DAE4D2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ABB7EA3-D4AD-414A-8471-6C29DAE4D2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ABB7EA3-D4AD-414A-8471-6C29DAE4D2EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
