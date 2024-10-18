@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer;
 
@@ -212,5 +213,56 @@ public class DataService : IDataService
             }).ToList();
 
         return orderDetails;
+    }
+
+    public IList<OrderDetailDTO> GetOrderDetailsByOrderId(int id)
+    {
+        using var db = new NorthWindContext();
+        var orderDetails = db.OrderDetails
+            .Where(od => od.OrderId == id)
+            .Select(od => new OrderDetailDTO
+            {
+                Quantity = od.Quantity,
+                UnitPrice = od.UnitPrice,
+                Product = new ProductDetailDTO
+                {
+                    Name = od.Product.Name,
+                }
+            }).ToList();
+        return orderDetails;
+    }
+
+    public IList<OrderDetailWithOrderDTO> GetOrderDetailsByProductId(int id)
+    {
+        using var db = new NorthWindContext();
+        var orderDetails = db.OrderDetails
+            .Include(od => od.Order)
+            .Where(od => od.ProductId == id)
+            .OrderBy(od => od.OrderId)
+            .Select(od => new OrderDetailWithOrderDTO
+            {
+                OrderId = od.OrderId,
+                Quantity = od.Quantity,
+                UnitPrice = od.UnitPrice,
+                Product = new ProductDetailDTO
+                {
+                    Name = od.Product.Name,
+                    Category = new CategoryDTO
+                    {
+                        Name = od.Product.Category.Name
+                    }
+                },
+                Order = new Order()
+                {
+                    Id = od.Order.Id,
+                    Date = od.Order.Date
+                }
+                
+               
+            }).ToList();
+
+        return orderDetails;
+
+
     }
 }

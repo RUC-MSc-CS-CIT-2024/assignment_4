@@ -8,7 +8,7 @@ public class NorthWindContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<OrderDetails> OrderDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -69,14 +69,14 @@ public class NorthWindContext : DbContext
     private static void MapOrderDetails(ModelBuilder modelBuilder)
     {
         // OrderDetails
-        modelBuilder.Entity<OrderDetail>()
+        modelBuilder.Entity<OrderDetails>()
             .ToTable("orderdetails")
             .HasKey(od => new { od.OrderId, od.ProductId }); // Composite key
 
-        modelBuilder.Entity<OrderDetail>().Property(od => od.UnitPrice).HasColumnName("unitprice");
-        modelBuilder.Entity<OrderDetail>().Property(od => od.Quantity).HasColumnName("quantity");
-        modelBuilder.Entity<OrderDetail>().Property(od => od.Discount).HasColumnName("discount");
-        modelBuilder.Entity<OrderDetail>().Property(od => od.OrderId).HasColumnName("orderid");
-        modelBuilder.Entity<OrderDetail>().Property(od => od.ProductId).HasColumnName("productid");
+        modelBuilder.Entity<OrderDetails>().Property(od => od.UnitPrice).HasColumnName("unitprice");
+        modelBuilder.Entity<OrderDetails>().Property(od => od.Quantity).HasColumnName("quantity");
+        modelBuilder.Entity<OrderDetails>().Property(od => od.Discount).HasColumnName("discount");
+        modelBuilder.Entity<OrderDetails>().Property(od => od.OrderId).HasColumnName("orderid");
+        modelBuilder.Entity<OrderDetails>().Property(od => od.ProductId).HasColumnName("productid");
     }
 }

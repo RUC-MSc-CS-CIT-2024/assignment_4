@@ -182,7 +182,7 @@ public class DataServiceTests
         var orders = service.GetOrders();
         Assert.Equal(830, orders.Count);
     }
-    
+
 
     /* order details */
     [Fact]
@@ -198,7 +198,7 @@ public class DataServiceTests
         Assert.Equal(0.0, orderDetails.Discount);
     }
 
-#if false
+
     [Fact]
     public void GetOrderDetailByOrderId_ValidId_ReturnsProductNameUnitPriceAndQuantity()
     {
@@ -221,7 +221,6 @@ public class DataServiceTests
         Assert.Equal(14, orderDetails.First().UnitPrice);
         Assert.Equal(12, orderDetails.First().Quantity);
     }
-
-#endif
+    
 
 }
