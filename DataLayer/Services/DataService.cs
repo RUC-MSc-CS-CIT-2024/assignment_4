@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer;
 
@@ -257,12 +256,8 @@ public class DataService : IDataService
                     Id = od.Order.Id,
                     Date = od.Order.Date
                 }
-                
-               
             }).ToList();
 
         return orderDetails;
-
-
     }
 }

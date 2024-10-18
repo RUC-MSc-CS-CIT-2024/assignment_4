@@ -1,4 +1,3 @@
-
 namespace DataLayer;
 
 public interface IDataService
@@ -18,7 +17,7 @@ public interface IDataService
     //Order
     OrderDTO GetOrder(int id);
     IList<OrderDTO> GetOrders();
-    
+
     IList<OrderDetailDTO> OrderDetails(int id);
     IList<OrderDetailDTO> GetOrderDetailsByOrderId(int id);
     IList<OrderDetailWithOrderDTO> GetOrderDetailsByProductId(int id);

@@ -20,11 +20,8 @@ public class NorthWindContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         MapCategories(modelBuilder);
-
         MapProducts(modelBuilder);
-
         MapOrders(modelBuilder);
-
         MapOrderDetails(modelBuilder);
     }
 
@@ -58,21 +55,13 @@ public class NorthWindContext : DbContext
         modelBuilder.Entity<Order>().Property(x => x.Required).HasColumnName("requireddate");
         modelBuilder.Entity<Order>().Property(x => x.ShipName).HasColumnName("shipname");
         modelBuilder.Entity<Order>().Property(x => x.ShipCity).HasColumnName("shipcity");
-
-        // Define relationship with OrderDetails
-        modelBuilder.Entity<Order>()
-            .HasMany(o => o.OrderDetails)
-            .WithOne(od => od.Order)
-            .HasForeignKey(od => od.OrderId);
+        modelBuilder.Entity<Order>().HasMany(o => o.OrderDetails).WithOne(od => od.Order).HasForeignKey(od => od.OrderId);
     }
 
     private static void MapOrderDetails(ModelBuilder modelBuilder)
     {
         // OrderDetails
-        modelBuilder.Entity<OrderDetails>()
-            .ToTable("orderdetails")
-            .HasKey(od => new { od.OrderId, od.ProductId }); // Composite key
-
+        modelBuilder.Entity<OrderDetails>().ToTable("orderdetails").HasKey(od => new { od.OrderId, od.ProductId });
         modelBuilder.Entity<OrderDetails>().Property(od => od.UnitPrice).HasColumnName("unitprice");
         modelBuilder.Entity<OrderDetails>().Property(od => od.Quantity).HasColumnName("quantity");
         modelBuilder.Entity<OrderDetails>().Property(od => od.Discount).HasColumnName("discount");
