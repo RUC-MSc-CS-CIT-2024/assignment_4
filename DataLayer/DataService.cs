@@ -4,10 +4,21 @@ namespace DataLayer;
 
 public interface IDataService {
     Category CreateCategory(string name, string description);
-
+    bool DeleteCategory(int categoryId);
+    List<Category> GetCategories();
+    Category? GetCategory(int categoryId);
+    Order GetOrder(int orderId);
+    List<OrderDetails> GetOrderDetailsByOrderId(int orderId);
+    List<OrderDetails> GetOrderDetailsByProductId(int productId);
+    List<Order> GetOrders(string shippingName);
+    List<Order> GetOrders();
+    Product? GetProduct(int productId);
+    List<Product> GetProductByCategory(int categoryId);
+    List<SimpleProductDto> GetProductByName(string productNameSubstring);
+    bool UpdateCategory(int categoryId, string name, string description);
 }
 
-public class DataService
+public class DataService: IDataService
 {
     private readonly NorthwindContext _context;
 
@@ -75,10 +86,10 @@ public class DataService
         => _context.Orders
             .ToList();
 
-    public Product GetProduct(int productId) 
+    public Product? GetProduct(int productId) 
         => _context.Products
             .Include(p => p.Category)
-            .First(p => p.Id == productId);
+            .FirstOrDefault(p => p.Id == productId);
     
 
     public List<Product> GetProductByCategory(int categoryId)
