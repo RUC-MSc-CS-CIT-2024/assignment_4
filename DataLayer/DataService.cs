@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataLayer;
 
@@ -22,12 +23,15 @@ public class DataService: IDataService
 {
     private readonly NorthwindContext _context;
 
-
-    public DataService()
-    {
+    public DataService() { 
         _context = new NorthwindContext();
-
     }
+
+    [ActivatorUtilitiesConstructor]
+    public DataService(NorthwindContext context) {
+        _context = context;
+    }
+
     public Category CreateCategory(string name, string description)
     {
         int maxId = _context.Categories.Max(c => c.Id);
@@ -48,28 +52,26 @@ public class DataService: IDataService
         return true;
     }
 
-    public List<Category> GetCategories()
-        => _context.Categories
-            .ToList();
+    public List<Category> GetCategories() 
+        => _context.Categories.ToList();
 
-    public Category? GetCategory(int categoryId)
-        => _context.Categories
-            .FirstOrDefault(c => c.Id == categoryId);
+    public Category? GetCategory(int categoryId) 
+        => _context.Categories.FirstOrDefault(c => c.Id == categoryId);
 
-    public Order GetOrder(int orderId)
+    public Order GetOrder(int orderId) 
         => _context.Orders
             .Include(o => o.OrderDetails)
             .ThenInclude(od => od.Product)
             .ThenInclude(p => p.Category)
             .First(o => o.Id == orderId);
 
-    public List<OrderDetails> GetOrderDetailsByOrderId(int orderId)
+    public List<OrderDetails> GetOrderDetailsByOrderId(int orderId) 
         => _context.OrderDetails
             .Include(od => od.Product)
             .Where(od => od.OrderId == orderId)
             .ToList();
 
-    public List<OrderDetails> GetOrderDetailsByProductId(int productId)
+    public List<OrderDetails> GetOrderDetailsByProductId(int productId) 
         => _context.OrderDetails
             .Include(od => od.Order)
             .Include(od => od.Product)
@@ -77,12 +79,12 @@ public class DataService: IDataService
             .OrderBy(od => od.OrderId)
             .ToList();
 
-    public List<Order> GetOrders(string shippingName)
+    public List<Order> GetOrders(string shippingName) 
         => _context.Orders
             .Where(o => o.ShipName == shippingName)
             .ToList();
 
-    public List<Order> GetOrders()
+    public List<Order> GetOrders() 
         => _context.Orders
             .ToList();
 
@@ -90,15 +92,14 @@ public class DataService: IDataService
         => _context.Products
             .Include(p => p.Category)
             .FirstOrDefault(p => p.Id == productId);
-    
 
-    public List<Product> GetProductByCategory(int categoryId)
+    public List<Product> GetProductByCategory(int categoryId) 
         => _context.Products
             .Include(p => p.Category)
             .Where(p => p.CategoryId == categoryId)
             .ToList();
 
-    public List<SimpleProductDto> GetProductByName(string productNameSubstring)
+    public List<SimpleProductDto> GetProductByName(string productNameSubstring) 
         => _context.Products
             .Include(p => p.Category)
             .Where(p => p.Name.Contains(productNameSubstring))

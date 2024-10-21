@@ -14,7 +14,7 @@ Group **cit11**:
 ## Test Results
 
 ```
-  dotnet test -l:"console;verbosity=detailed"
+$ dotnet test -l:"console;verbosity=detailed"
   Determining projects to restore...
   All projects are up-to-date for restore.
   DataLayer -> .\DataLayer\bin\Debug\net8.0\DataLayer.dll

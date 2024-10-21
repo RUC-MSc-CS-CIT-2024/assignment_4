@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using DataLayer;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,9 @@ builder.Services
         });
 
 builder.Services.AddScoped<IDataService, DataService>();
+builder.Services.AddDbContext<NorthwindContext>(
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString("NorthwindLocal"))
+);
 
 var app = builder.Build();
 
