@@ -1,0 +1,40 @@
+@WebApi_HostAddress = http://localhost:5001
+
+GET {{WebApi_HostAddress}}/api/categories
+Accept: application/json
+
+###
+GET {{WebApi_HostAddress}}/api/categories/111
+
+###
+POST {{WebApi_HostAddress}}/api/categories
+Content-Type: application/json
+
+{
+    "name": "test",
+    "description": "test"
+}
+
+###
+PUT {{WebApi_HostAddress}}/api/categories/9
+Content-Type: application/json
+
+{
+    "name": "test2",
+    "description": "test2"
+}
+
+###
+DELETE {{WebApi_HostAddress}}/api/categories/9
+
+###
+GET {{WebApi_HostAddress}}/api/products/1
+Accept: application/json
+
+###
+GET {{WebApi_HostAddress}}/api/products/category/1
+Accept: application/json
+
+###
+GET {{WebApi_HostAddress}}/api/products?name=em
+Accept: application/json
